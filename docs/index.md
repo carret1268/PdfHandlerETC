@@ -27,14 +27,6 @@ Install from PyPI:
 pip install pdfhandleretc
 ```
 
-Or from source:
-
-```
-git clone https://github.com/yourusername/pdfhandleretc.git
-cd pdfhandleretc
-pip install .
-```
-
 ## Command-Line Usage
 
 After installation, you can use the `pdfhandler` CLI tool:

@@ -13,5 +13,5 @@ License: CC0
 from .pdf_handler import PdfHandler
 
 __author__ = "E. Tyler Carr"
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 __all__ = ["PdfHandler"]
