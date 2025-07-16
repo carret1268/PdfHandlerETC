@@ -1,0 +1,57 @@
+[project]
+name = "pdfhandleretc"
+version = "0.1.0"
+description = "Lightweight command-line and Python API toolkit for PDF text extraction, encryption, permissions, and more."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "CC0-1.0" }
+authors = [
+  { name = "Erik Carr", email = "your.email@example.com" }
+]
+keywords = ["pdf", "pdfminer", "pikepdf", "encryption", "text-extraction", "cli"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: CC0 1.0 Universal (CC0 1.0) Public Domain Dedication",
+  "Operating System :: OS Independent",
+  "Topic :: Text Processing :: General",
+  "Topic :: Utilities"
+]
+dependencies = [
+  "pdfminer.six>=20221105",
+  "pikepdf>=7.0.0",
+  "colorama>=0.4.6"
+]
+
+[project.urls]
+Homepage = "https://github.com/carret1268/pdfhandleretc"
+Repository = "https://github.com/carret1268/pdfhandleretc"
+Issues = "https://github.com/carret1268/pdfhandleretc/issues"
+
+[project.scripts]
+pdfhandler = "pdfhelper.__main__:main"
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["pdf_handler"]
+
+[tool.ruff]
+lint.ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.10"  
+ignore_missing_imports = true
+strict_optional = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+warn_unused_ignores = true
+show_error_codes = true
+
+[tool.coverage.run]
+branch = true
+source = ["pdf_handler"]
