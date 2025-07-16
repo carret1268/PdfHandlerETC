@@ -199,7 +199,7 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../pdf_handler.html">Scrap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pdf_handler.html">PdfHandler</a></li>
 </ul>
 
 </div>
@@ -505,7 +505,7 @@
         <span class="n">output</span><span class="p">:</span> <span class="n">PathNoneType</span><span class="p">,</span>
         <span class="n">in_place</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
         <span class="n">crypt_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">password</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">password</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">owner_password</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">extract</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
         <span class="n">modify_annotation</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
@@ -560,9 +560,9 @@
 <span class="sd">            If an invalid `crypt_type` is provided or if the resolved output path is invalid.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">password</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">password</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span> <span class="c1"># nosec B105</span>
+            <span class="n">password</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>  <span class="c1"># nosec B105</span>
         <span class="k">if</span> <span class="n">owner_password</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">owner_password</span> <span class="o">=</span> <span class="s2">&quot;1234abcd&quot;</span> <span class="c1"># nosec B105</span>
+            <span class="n">owner_password</span> <span class="o">=</span> <span class="s2">&quot;1234abcd&quot;</span>  <span class="c1"># nosec B105</span>
 
         <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_output_path</span><span class="p">(</span><span class="n">in_place</span><span class="o">=</span><span class="n">in_place</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="n">output</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
 
@@ -719,7 +719,12 @@
             <span class="n">output_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_output_path</span><span class="p">(</span><span class="n">in_place</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="s2">&quot;-Encrypted&quot;</span><span class="p">)</span>
 
             <span class="c1">## save pdf contents in encrypted path</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">save_pike_pdf</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span> <span class="n">crypt_type</span><span class="o">=</span><span class="s2">&quot;encrypt&quot;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">password</span><span class="p">,</span> <span class="n">owner_password</span><span class="o">=</span><span class="n">owner_password</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">save_pike_pdf</span><span class="p">(</span>
+                <span class="n">output_path</span><span class="p">,</span>
+                <span class="n">crypt_type</span><span class="o">=</span><span class="s2">&quot;encrypt&quot;</span><span class="p">,</span>
+                <span class="n">password</span><span class="o">=</span><span class="n">password</span><span class="p">,</span>
+                <span class="n">owner_password</span><span class="o">=</span><span class="n">owner_password</span><span class="p">,</span>
+            <span class="p">)</span>
 
         <span class="k">else</span><span class="p">:</span>
             <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The following PDF was already encrypted: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">pdf_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
@@ -756,7 +761,7 @@
 <span class="sd">        None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">owner_password</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">owner_password</span> <span class="o">=</span> <span class="s2">&quot;1234abcd&quot;</span> <span class="c1"># nosec B105</span>
+            <span class="n">owner_password</span> <span class="o">=</span> <span class="s2">&quot;1234abcd&quot;</span>  <span class="c1"># nosec B105</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pdf_is_encrypted</span><span class="p">():</span>
             <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Decrypting the following PDF: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">pdf_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>

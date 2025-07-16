@@ -1,3 +1,7 @@
+[![PyPI](https://img.shields.io/pypi/v/pdfhandleretc.svg)](https://pypi.org/project/pdfhandleretc/)  
+[![Documentation Status](https://readthedocs.org/projects/pdfhandleretc/badge/?version=latest)](https://scraperetc.readthedocs.io/en/latest/)  
+[![CI](https://github.com/carret1268/PdfHandlerETC/actions/workflows/ci.yml/badge.svg)](https://github.com/carret1268/PdfHandlerETC/actions/workflows/ci.yml)
+
 # PdfHandlerETC
 
 PdfHandlerETC is a lightweight command-line and Python toolkit for handling common PDF tasks including text extraction, encryption, decryption, permissions inspection, word counting, page resizing, and file merging.
