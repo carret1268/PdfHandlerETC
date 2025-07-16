@@ -255,7 +255,7 @@ class PdfHandler:
         output: PathNoneType,
         in_place: bool = False,
         crypt_type: str | None = None,
-        password: str = "",
+        password: Optional[str] = None,
         owner_password: Optional[str] = None,
         extract: bool = True,
         modify_annotation: bool = True,
@@ -310,9 +310,9 @@ class PdfHandler:
             If an invalid `crypt_type` is provided or if the resolved output path is invalid.
         """
         if password is None:
-            password = "" # nosec B105
+            password = ""  # nosec B105
         if owner_password is None:
-            owner_password = "1234abcd" # nosec B105
+            owner_password = "1234abcd"  # nosec B105
 
         output = self._get_output_path(in_place=in_place, output=output, suffix="")
 
@@ -460,7 +460,12 @@ class PdfHandler:
             output_path = self._get_output_path(in_place, output, "-Encrypted")
 
             ## save pdf contents in encrypted path
-            self.save_pike_pdf(output_path, crypt_type="encrypt", password=password, owner_password=owner_password)
+            self.save_pike_pdf(
+                output_path,
+                crypt_type="encrypt",
+                password=password,
+                owner_password=owner_password,
+            )
 
         else:
             logging.info(f"The following PDF was already encrypted: {self.pdf_path}")
@@ -494,7 +499,7 @@ class PdfHandler:
         None
         """
         if owner_password is None:
-            owner_password = "1234abcd" # nosec B105
+            owner_password = "1234abcd"  # nosec B105
 
         if self.pdf_is_encrypted():
             logging.info(f"Decrypting the following PDF: {self.pdf_path}")
