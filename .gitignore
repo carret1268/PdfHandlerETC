@@ -1,2 +1,5 @@
 .ruff_cache/
 .mypy_cache/
+pdf_handler/__pycache__/
+*.egg-info
+dist/

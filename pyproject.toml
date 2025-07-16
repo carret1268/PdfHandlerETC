@@ -38,7 +38,7 @@ build-backend = "setuptools.build_meta"
 include-package-data = true
 
 [tool.setuptools.packages.find]
-where = ["pdf_handler"]
+where = ["."]
 
 [tool.ruff]
 lint.ignore = ["E501"]
