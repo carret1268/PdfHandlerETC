@@ -1,5 +1,5 @@
 [![PyPI](https://img.shields.io/pypi/v/pdfhandleretc.svg)](https://pypi.org/project/pdfhandleretc/)  
-[![Documentation Status](https://readthedocs.org/projects/pdfhandleretc/badge/?version=latest)](https://scraperetc.readthedocs.io/en/latest/)  
+[![Documentation Status](https://readthedocs.org/projects/pdfhandleretc/badge/?version=latest)](https://pdfhandleretc.readthedocs.io/en/latest/)  
 [![CI](https://github.com/carret1268/PdfHandlerETC/actions/workflows/ci.yml/badge.svg)](https://github.com/carret1268/PdfHandlerETC/actions/workflows/ci.yml)
 
 # PdfHandlerETC
