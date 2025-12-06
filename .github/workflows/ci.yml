@@ -34,13 +34,13 @@ jobs:
         pip install -r docs/requirements.txt
 
     - name: Run linter (Ruff)
-      run: ruff check pdf_handler/
+      run: ruff check pdfhandler/
 
     - name: Check formatting (Ruff)
       run: ruff format --check .
 
     - name: Run static typechecker (Mypy)
-      run: mypy pdf_handler/
+      run: mypy pdfhandler/
 
     - name: Run tests with coverage
       run: |
