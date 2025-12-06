@@ -9,7 +9,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(
         description="PdfHandlerETC - Command-line PDF utility for encryption, extraction, and more."
     )
-    parser.add_argument("--version", action="version", version="PdfHandlerETC 0.1.2")
+    parser.add_argument("--version", action="version", version="PdfHandlerETC 0.1.4")
 
     subparsers = parser.add_subparsers(dest="command", required=True)
 

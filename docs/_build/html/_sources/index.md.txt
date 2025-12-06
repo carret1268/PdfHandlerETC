@@ -1,6 +1,4 @@
-[![PyPI](https://img.shields.io/pypi/v/pdfhandleretc.svg)](https://pypi.org/project/pdfhandleretc/)  
-[![Documentation Status](https://readthedocs.org/projects/pdfhandleretc/badge/?version=latest)](https://scraperetc.readthedocs.io/en/latest/)  
-[![CI](https://github.com/carret1268/PdfHandlerETC/actions/workflows/ci.yml/badge.svg)](https://github.com/carret1268/PdfHandlerETC/actions/workflows/ci.yml)
+[![PyPI](https://img.shields.io/pypi/v/pdfhandleretc.svg)](https://pypi.org/project/pdfhandleretc/) [![Documentation Status](https://readthedocs.org/projects/pdfhandleretc/badge/?version=latest)](https://pdfhandleretc.readthedocs.io/en/latest/) [![CI](https://github.com/carret1268/PdfHandlerETC/actions/workflows/ci.yml/badge.svg)](https://github.com/carret1268/PdfHandlerETC/actions/workflows/ci.yml) [![codecov](https://codecov.io/github/carret1268/PdfHandlerETC/branch/main/graph/badge.svg)](https://codecov.io/github/carret1268/PdfHandlerETC)
 
 # PdfHandlerETC
 
@@ -23,7 +21,7 @@ This project is released under the [CC0 1.0 Public Domain Dedication](https://cr
 
 Install from PyPI:
 
-```
+```bash
 pip install pdfhandleretc
 ```
 
@@ -31,28 +29,28 @@ pip install pdfhandleretc
 
 After installation, you can use the `pdfhandler` CLI tool:
 
-```
-pdfhandler extract document.pdf --pages "1-3, 5"
-pdfhandler wordcount document.pdf --pages "1, 3"
-pdfhandler encrypt document.pdf --output secure.pdf
-pdfhandler decrypt secure.pdf --in-place
-pdfhandler permissions secure.pdf
-pdfhandler resize document.pdf 612 792 --output resized.pdf
-pdfhandler dupe-check file1.pdf file2.pdf
-pdfhandler merge intro.pdf appendix.pdf merged.pdf --add-separator black
+```bash
+python -m pdfhandler extract document.pdf --pages "1-3, 5" > document_text.txt
+python -m pdfhandler wordcount document.pdf --pages "1, 3"
+python -m pdfhandler encrypt document.pdf --output secure.pdf
+python -m pdfhandler decrypt secure.pdf --in-place
+python -m pdfhandler permissions secure.pdf
+python -m pdfhandler resize document.pdf 612 792 --output resized.pdf
+python -m pdfhandler dupe-check file1.pdf file2.pdf
+python -m pdfhandler merge intro.pdf appendix.pdf merged.pdf --add-separator black
 ```
 
 Use `--help` for details:
 
-```
-pdfhandler --help
-pdfhandler extract --help
+```bash
+python -m pdfhandler --help
+python -m pdfhandler extract --help
 ```
 
 ## Python Usage
 
 ```python
-from pdfhandler import PdfHandler, PdfHandlerUtils
+from pdfhandler import PdfHandler
 
 handler = PdfHandler("example.pdf")
 
@@ -73,7 +71,7 @@ handler.print_permissions()
 handler.resize(width=612, height=792, output_path="resized.pdf")
 
 # Merge with a visual separator (black bar or blank page)
-PdfHandlerUtils.merge_pdfs(
+PdfHandler.merge_pdfs(
     "intro.pdf",
     "appendix.pdf",
     "merged.pdf",
