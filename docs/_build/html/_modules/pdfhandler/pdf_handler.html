@@ -1,0 +1,963 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../genindex.html"><link rel="search" title="Search" href="../../search.html">
+
+    <!-- Generated with Sphinx 8.2.3 and Furo 2025.09.25 -->
+        <title>pdfhandler.pdf_handler - PdfHelperETC 0.1.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=580074bf" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">PdfHelperETC 0.1.2 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  
+  <span class="sidebar-brand-text">PdfHelperETC 0.1.2 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../pdf_handler.html">PdfHandler</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <h1>Source code for pdfhandler.pdf_handler</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;High-level utilities for inspecting and modifying PDF files.</span>
+
+<span class="sd">This module exposes :class:`PdfHandler`, a convenience wrapper around ``pikepdf``</span>
+<span class="sd">and ``pdfminer`` for:</span>
+
+<span class="sd">* text extraction and word counting</span>
+<span class="sd">* encryption, decryption, and permission inspection</span>
+<span class="sd">* moving, deleting, and resizing PDFs</span>
+<span class="sd">* merging PDFs with optional separator pages</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">importlib.resources</span><span class="w"> </span><span class="kn">import</span> <span class="n">as_file</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Literal</span><span class="p">,</span> <span class="n">cast</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pikepdf</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">colorama</span><span class="w"> </span><span class="kn">import</span> <span class="n">Fore</span><span class="p">,</span> <span class="n">init</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pdfminer.high_level</span><span class="w"> </span><span class="kn">import</span> <span class="n">extract_text</span>
+
+<span class="n">PageNumberType</span> <span class="o">=</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span> <span class="o">|</span> <span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span>
+<span class="n">PathType</span> <span class="o">=</span> <span class="n">Path</span> <span class="o">|</span> <span class="nb">str</span>
+<span class="n">PathNoneType</span> <span class="o">=</span> <span class="n">PathType</span> <span class="o">|</span> <span class="kc">None</span>
+
+
+<div class="viewcode-block" id="PdfHandler">
+<a class="viewcode-back" href="../../pdf_handler.html#pdfhandler.pdf_handler.PdfHandler">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">PdfHandler</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Helper for common operations on a single PDF file.</span>
+
+<span class="sd">    The handler validates the input path on construction and then provides</span>
+<span class="sd">    methods for:</span>
+
+<span class="sd">    * extracting text and counting words</span>
+<span class="sd">    * checking and changing encryption / permissions</span>
+<span class="sd">    * moving, deleting, and resizing the file</span>
+<span class="sd">    * merging PDFs and inserting separator pages</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Handles mixed strings like &quot;1, 3, 5-9 and 12&quot;</span>
+    <span class="n">_page_number_regex</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;(?:[\s,]*|(?:\sand\s))(\d+)(?:-(\d+))?&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pdf_path</span><span class="p">:</span> <span class="n">PathType</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a PdfHandler for the given path.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        pdf_path : str | Path</span>
+<span class="sd">            Path to an existing ``.pdf`` file.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If the path does not end with ``.pdf`` (case-insensitive).</span>
+<span class="sd">        FileExistsError</span>
+<span class="sd">            If no file exists at the resolved path.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pdf_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">pdf_path</span><span class="p">))</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pdf_path</span><span class="o">.</span><span class="n">suffix</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">!=</span> <span class="s2">&quot;.pdf&quot;</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;PDF path suffix must be &#39;.pdf&#39;, not </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">pdf_path</span><span class="o">.</span><span class="n">suffix</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">pdf_path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">FileExistsError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No file exists at </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">pdf_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_page_numbers_from_str</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">page_numbers</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Parse a 1-indexed page-string into a sorted list of page numbers.</span>
+
+<span class="sd">        Accepts mixed formatting with commas, whitespace, ``&quot;and&quot;``, and ranges</span>
+<span class="sd">        using hyphens. For example, the input string ``&quot;1, 3, 5-7 and 10&quot;``</span>
+<span class="sd">        will return ``[1, 3, 5, 6, 7, 10]``.</span>
+
+<span class="sd">        This method does not adjust for zero-based indexing; callers must</span>
+<span class="sd">        subtract one if 0-indexed page indices are required.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        page_numbers : str</span>
+<span class="sd">            A string representing page numbers to include. Acceptable formats</span>
+<span class="sd">            include:</span>
+
+<span class="sd">            * single numbers (e.g., ``&quot;3&quot;``)</span>
+<span class="sd">            * comma-separated numbers (e.g., ``&quot;1, 2, 3&quot;``)</span>
+<span class="sd">            * ranges using hyphens (e.g., ``&quot;4-6&quot;``)</span>
+<span class="sd">            * ``&quot;and&quot;`` as a delimiter (e.g., ``&quot;2 and 5&quot;``)</span>
+<span class="sd">            * mixed input (e.g., ``&quot;1, 3-4 and 6&quot;``)</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list[int]</span>
+<span class="sd">            A sorted list of unique 1-indexed page numbers. Returns an empty</span>
+<span class="sd">            list if no valid numbers are found.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">page_number_matches</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">_page_number_regex</span><span class="p">,</span> <span class="n">page_numbers</span><span class="p">)</span>
+
+        <span class="n">page_numbers_set</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">match</span> <span class="ow">in</span> <span class="n">page_number_matches</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">match</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+                <span class="n">page_numbers_set</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">match</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">page_number</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">match</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">int</span><span class="p">(</span><span class="n">match</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+                    <span class="n">page_numbers_set</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">page_number</span><span class="p">)</span>
+
+        <span class="n">page_numbers_list</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">page_numbers_set</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">page_numbers_list</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_parse_page_numbers</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">pages</span><span class="p">:</span> <span class="n">PageNumberType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Normalize user-provided page numbers to 0-indexed page indices.</span>
+
+<span class="sd">        Page numbers in user input are assumed to be 1-indexed and are converted</span>
+<span class="sd">        to 0-indexed integers.</span>
+
+<span class="sd">        Acceptable input formats</span>
+<span class="sd">        ------------------------</span>
+<span class="sd">        * ``None`` is not supported here (the caller should handle this)</span>
+<span class="sd">        * a single ``int`` or ``str`` (e.g., ``3`` or ``&quot;3&quot;``)</span>
+<span class="sd">        * a range string using a hyphen (e.g., ``&quot;5-7&quot;``)</span>
+<span class="sd">        * a comma/space/``&quot;and&quot;``-delimited string</span>
+<span class="sd">          (e.g., ``&quot;1, 3 and 5-6&quot;``)</span>
+<span class="sd">        * a list of any combination of ``int`` and ``str``</span>
+<span class="sd">          (e.g., ``[1, &quot;3-4&quot;, &quot;6 and 8&quot;]``)</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        pages : PageNumberType</span>
+<span class="sd">            The page numbers to extract, excluding ``None``. See acceptable</span>
+<span class="sd">            formats above.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list[int]</span>
+<span class="sd">            A sorted list of 0-indexed page indices.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pages</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">pages_list</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_get_page_numbers_from_str</span><span class="p">(</span><span class="n">pages</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pages</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="n">pages_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">pages</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pages</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">new_pages</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">page</span> <span class="ow">in</span> <span class="n">pages</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">page</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_get_page_numbers_from_str</span><span class="p">(</span><span class="n">page</span><span class="p">):</span>
+                        <span class="n">new_pages</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">new_pages</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">page</span><span class="p">))</span>
+            <span class="n">pages_list</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">new_pages</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;pages must be an int, str, list[int | str], or similar value, not </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">pages</span><span class="p">)</span><span class="si">!r}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">page</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">page</span> <span class="ow">in</span> <span class="n">pages_list</span><span class="p">]</span>
+
+<div class="viewcode-block" id="PdfHandler.get_pdf_text">
+<a class="viewcode-back" href="../../pdf_handler.html#pdfhandler.pdf_handler.PdfHandler.get_pdf_text">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_pdf_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pages</span><span class="p">:</span> <span class="n">PageNumberType</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract text from the PDF, optionally from specific pages.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        pages : PageNumberType, optional</span>
+<span class="sd">            Pages to extract text from. If ``None`` (default), all pages are</span>
+<span class="sd">            included. Acceptable formats include:</span>
+
+<span class="sd">            * a single int or str (e.g., ``5`` or ``&quot;5&quot;``)</span>
+<span class="sd">            * a range as a str (e.g., ``&quot;2-4&quot;``)</span>
+<span class="sd">            * a comma/space/``&quot;and&quot;``-delimited str</span>
+<span class="sd">              (e.g., ``&quot;1, 3 and 5-6&quot;``)</span>
+<span class="sd">            * a list of ints and/or strs (e.g., ``[1, &quot;3&quot;, &quot;5-7&quot;]``)</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            The extracted text as a single string. Returns an empty string if</span>
+<span class="sd">            no text is found.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">pages</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">pikepdf</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pdf_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">pdf</span><span class="p">:</span>
+                <span class="n">page_indices</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pdf</span><span class="o">.</span><span class="n">pages</span><span class="p">)))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">page_indices</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_page_numbers</span><span class="p">(</span><span class="n">pages</span><span class="p">))</span>
+
+        <span class="n">pdf_text</span> <span class="o">=</span> <span class="n">extract_text</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pdf_path</span><span class="p">,</span> <span class="n">page_numbers</span><span class="o">=</span><span class="n">page_indices</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">pdf_text</span></div>
+
+
+<div class="viewcode-block" id="PdfHandler.word_count">
+<a class="viewcode-back" href="../../pdf_handler.html#pdfhandler.pdf_handler.PdfHandler.word_count">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">word_count</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pages</span><span class="p">:</span> <span class="n">PageNumberType</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Count the number of words in the PDF.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        pages : PageNumberType, optional</span>
+<span class="sd">            Pages to include in the word count. If ``None`` (default), all</span>
+<span class="sd">            pages are included. See :meth:`get_pdf_text` for accepted formats.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        int</span>
+<span class="sd">            The total number of words found on the specified pages.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_pdf_text</span><span class="p">(</span><span class="n">pages</span><span class="p">)</span>
+        <span class="n">words</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\b\w+\b&quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="PdfHandler.pdf_is_encrypted">
+<a class="viewcode-back" href="../../pdf_handler.html#pdfhandler.pdf_handler.PdfHandler.pdf_is_encrypted">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">pdf_is_encrypted</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return whether the PDF is encrypted.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            ``True`` if the PDF is encrypted, ``False`` otherwise.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="n">pikepdf</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pdf_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">pike_doc</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">pike_doc</span><span class="o">.</span><span class="n">is_encrypted</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_output_path</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">in_place</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="n">output</span><span class="p">:</span> <span class="n">PathNoneType</span><span class="p">,</span>
+        <span class="n">suffix</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Resolve the output path for saving a modified PDF.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        in_place : bool</span>
+<span class="sd">            If ``True``, returns the original PDF path (the file is overwritten</span>
+<span class="sd">            in place).</span>
+<span class="sd">        output : str | Path | None</span>
+<span class="sd">            The desired output path. Ignored if ``in_place`` is ``True``. If</span>
+<span class="sd">            ``None``, a default path is generated using ``suffix``.</span>
+<span class="sd">        suffix : str</span>
+<span class="sd">            Suffix to append to the original filename when ``output`` is</span>
+<span class="sd">            ``None``.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Path</span>
+<span class="sd">            The resolved path for saving the output PDF.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If ``output`` is provided and does not have a ``.pdf`` extension.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">in_place</span><span class="p">:</span>
+            <span class="n">output_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pdf_path</span>
+        <span class="k">elif</span> <span class="n">output</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">output_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pdf_path</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">pdf_path</span><span class="o">.</span><span class="n">stem</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">suffix</span><span class="si">}</span><span class="s2">.pdf&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">output_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">output</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">output_path</span><span class="o">.</span><span class="n">suffix</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">!=</span> <span class="s2">&quot;.pdf&quot;</span><span class="p">:</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="s2">&quot;output should either be None or be a path-like object &quot;</span>
+                    <span class="s2">&quot;with a &#39;.pdf&#39; suffix. &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;Got </span><span class="si">{</span><span class="n">output</span><span class="si">!r}</span><span class="s2">.&quot;</span>
+                <span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">output_path</span>
+
+<div class="viewcode-block" id="PdfHandler.save_pike_pdf">
+<a class="viewcode-back" href="../../pdf_handler.html#pdfhandler.pdf_handler.PdfHandler.save_pike_pdf">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">save_pike_pdf</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">output</span><span class="p">:</span> <span class="n">PathNoneType</span><span class="p">,</span>
+        <span class="n">in_place</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">crypt_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">password</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">owner_password</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">extract</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">modify_annotation</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">modify_assembly</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">modify_form</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">modify_other</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">print_lowres</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">print_highres</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Save the PDF with optional encryption or decryption applied.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        output : str | Path | None</span>
+<span class="sd">            Destination for the saved file. Ignored if ``in_place`` is ``True``.</span>
+<span class="sd">            If ``None``, a new file is saved with a suffix such as</span>
+<span class="sd">            ``&quot;-Encrypted&quot;`` or ``&quot;-Decrypted&quot;`` depending on usage.</span>
+<span class="sd">        in_place : bool, default False</span>
+<span class="sd">            If ``True``, overwrites the original file. If ``False``, creates a</span>
+<span class="sd">            new file.</span>
+<span class="sd">        crypt_type : str | None, default None</span>
+<span class="sd">            A preset encryption mode. Must be one of:</span>
+
+<span class="sd">            * ``&quot;decrypt&quot;`` : disables encryption entirely</span>
+<span class="sd">            * ``&quot;encrypt&quot;`` : enables encryption with all permissions set</span>
+<span class="sd">              to ``False``</span>
+<span class="sd">            * ``&quot;no_copy&quot;`` : like ``&quot;decrypt&quot;`` but with extract permission</span>
+<span class="sd">              set to ``False``</span>
+<span class="sd">            * ``None`` : uses the individual permission arguments below</span>
+<span class="sd">        password : str | None, default None</span>
+<span class="sd">            User password for opening the encrypted PDF. If ``None`` or an</span>
+<span class="sd">            empty string, no password is required to open.</span>
+<span class="sd">        owner_password : str | None, default None</span>
+<span class="sd">            Owner password used to set permissions. A default value is used if</span>
+<span class="sd">            this is ``None``.</span>
+<span class="sd">        extract : bool, default True</span>
+<span class="sd">            Whether users can extract text or images.</span>
+<span class="sd">        modify_annotation : bool, default True</span>
+<span class="sd">            Whether users can modify annotations.</span>
+<span class="sd">        modify_assembly : bool, default True</span>
+<span class="sd">            Whether users can rearrange pages or merge documents.</span>
+<span class="sd">        modify_form : bool, default True</span>
+<span class="sd">            Whether users can fill in or edit form fields.</span>
+<span class="sd">        modify_other : bool, default True</span>
+<span class="sd">            Whether users can make general modifications.</span>
+<span class="sd">        print_lowres : bool, default True</span>
+<span class="sd">            Whether users can print in low resolution.</span>
+<span class="sd">        print_highres : bool, default True</span>
+<span class="sd">            Whether users can print in high resolution.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If ``crypt_type`` is invalid or if the resolved output path is</span>
+<span class="sd">            invalid.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">password</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">password</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>  <span class="c1"># nosec B105</span>
+        <span class="k">if</span> <span class="n">owner_password</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">owner_password</span> <span class="o">=</span> <span class="s2">&quot;1234abcd&quot;</span>  <span class="c1"># nosec B105</span>
+
+        <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_output_path</span><span class="p">(</span><span class="n">in_place</span><span class="o">=</span><span class="n">in_place</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="n">output</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">crypt_type</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">crypt_type</span> <span class="o">=</span> <span class="n">crypt_type</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">match</span> <span class="n">crypt_type</span><span class="p">:</span>
+            <span class="k">case</span> <span class="s2">&quot;decrypt&quot;</span><span class="p">:</span>
+                <span class="n">pike_encryption</span><span class="p">:</span> <span class="n">pikepdf</span><span class="o">.</span><span class="n">Encryption</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">case</span> <span class="s2">&quot;encrypt&quot;</span><span class="p">:</span>
+                <span class="n">extract</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="n">modify_annotation</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="n">modify_assembly</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="n">modify_form</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="n">modify_other</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="n">print_lowres</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="n">print_highres</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="n">pike_encryption</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">case</span> <span class="s2">&quot;no_copy&quot;</span><span class="p">:</span>
+                <span class="n">extract</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="n">pike_encryption</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">case</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">pike_encryption</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="s2">&quot;crypt_type must be one of [&#39;encrypt&#39;, &#39;decrypt&#39;, &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;&#39;no_copy&#39;, None], not </span><span class="si">{</span><span class="n">crypt_type</span><span class="si">!r}</span><span class="s2">&quot;</span>
+                <span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">crypt_type</span> <span class="o">!=</span> <span class="s2">&quot;decrypt&quot;</span><span class="p">:</span>
+            <span class="n">pike_encryption</span> <span class="o">=</span> <span class="n">pikepdf</span><span class="o">.</span><span class="n">Encryption</span><span class="p">(</span>
+                <span class="n">user</span><span class="o">=</span><span class="n">password</span><span class="p">,</span>
+                <span class="n">owner</span><span class="o">=</span><span class="n">owner_password</span><span class="p">,</span>
+                <span class="n">allow</span><span class="o">=</span><span class="n">pikepdf</span><span class="o">.</span><span class="n">Permissions</span><span class="p">(</span>
+                    <span class="n">extract</span><span class="o">=</span><span class="n">extract</span><span class="p">,</span>
+                    <span class="n">modify_annotation</span><span class="o">=</span><span class="n">modify_annotation</span><span class="p">,</span>
+                    <span class="n">modify_assembly</span><span class="o">=</span><span class="n">modify_assembly</span><span class="p">,</span>
+                    <span class="n">modify_form</span><span class="o">=</span><span class="n">modify_form</span><span class="p">,</span>
+                    <span class="n">modify_other</span><span class="o">=</span><span class="n">modify_other</span><span class="p">,</span>
+                    <span class="n">print_lowres</span><span class="o">=</span><span class="n">print_lowres</span><span class="p">,</span>
+                    <span class="n">print_highres</span><span class="o">=</span><span class="n">print_highres</span><span class="p">,</span>
+                <span class="p">),</span>
+            <span class="p">)</span>
+
+        <span class="k">with</span> <span class="n">pikepdf</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pdf_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">pike_doc</span><span class="p">:</span>
+            <span class="n">pike_doc</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">encryption</span><span class="o">=</span><span class="n">pike_encryption</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="PdfHandler.get_pdf_permissions">
+<a class="viewcode-back" href="../../pdf_handler.html#pdfhandler.pdf_handler.PdfHandler.get_pdf_permissions">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_pdf_permissions</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the current permission settings of the PDF.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict[str, bool]</span>
+<span class="sd">            A dictionary mapping permission names to boolean values. Keys</span>
+<span class="sd">            include:</span>
+
+<span class="sd">            * ``&quot;extract&quot;``</span>
+<span class="sd">            * ``&quot;modify_annotation&quot;``</span>
+<span class="sd">            * ``&quot;modify_assembly&quot;``</span>
+<span class="sd">            * ``&quot;modify_form&quot;``</span>
+<span class="sd">            * ``&quot;modify_other&quot;``</span>
+<span class="sd">            * ``&quot;print_lowres&quot;``</span>
+<span class="sd">            * ``&quot;print_highres&quot;``</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="n">pikepdf</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pdf_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">pike_doc</span><span class="p">:</span>
+            <span class="n">permissions_dict</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;extract&quot;</span><span class="p">:</span> <span class="n">pike_doc</span><span class="o">.</span><span class="n">allow</span><span class="o">.</span><span class="n">extract</span><span class="p">,</span>
+                <span class="s2">&quot;modify_annotation&quot;</span><span class="p">:</span> <span class="n">pike_doc</span><span class="o">.</span><span class="n">allow</span><span class="o">.</span><span class="n">modify_annotation</span><span class="p">,</span>
+                <span class="s2">&quot;modify_assembly&quot;</span><span class="p">:</span> <span class="n">pike_doc</span><span class="o">.</span><span class="n">allow</span><span class="o">.</span><span class="n">modify_assembly</span><span class="p">,</span>
+                <span class="s2">&quot;modify_form&quot;</span><span class="p">:</span> <span class="n">pike_doc</span><span class="o">.</span><span class="n">allow</span><span class="o">.</span><span class="n">modify_form</span><span class="p">,</span>
+                <span class="s2">&quot;modify_other&quot;</span><span class="p">:</span> <span class="n">pike_doc</span><span class="o">.</span><span class="n">allow</span><span class="o">.</span><span class="n">modify_other</span><span class="p">,</span>
+                <span class="s2">&quot;print_lowres&quot;</span><span class="p">:</span> <span class="n">pike_doc</span><span class="o">.</span><span class="n">allow</span><span class="o">.</span><span class="n">print_lowres</span><span class="p">,</span>
+                <span class="s2">&quot;print_highres&quot;</span><span class="p">:</span> <span class="n">pike_doc</span><span class="o">.</span><span class="n">allow</span><span class="o">.</span><span class="n">print_highres</span><span class="p">,</span>
+            <span class="p">}</span>
+
+        <span class="k">return</span> <span class="n">permissions_dict</span></div>
+
+
+<div class="viewcode-block" id="PdfHandler.print_permissions">
+<a class="viewcode-back" href="../../pdf_handler.html#pdfhandler.pdf_handler.PdfHandler.print_permissions">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">print_permissions</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Print encryption and permission status to the console.</span>
+
+<span class="sd">        Output is color-coded using ``colorama``:</span>
+
+<span class="sd">        * green for enabled permissions</span>
+<span class="sd">        * red for disabled permissions</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">init</span><span class="p">()</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Permissions for </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">pdf_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="n">is_encrypted</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pdf_is_encrypted</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">Is encrypted: &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">Fore</span><span class="o">.</span><span class="n">LIGHTRED_EX</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">is_encrypted</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="n">Fore</span><span class="o">.</span><span class="n">LIGHTGREEN_EX</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">is_encrypted</span><span class="si">}{</span><span class="n">Fore</span><span class="o">.</span><span class="n">RESET</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+
+        <span class="n">permissions_dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_pdf_permissions</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">permissions_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t\t</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">Fore</span><span class="o">.</span><span class="n">LIGHTGREEN_EX</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="n">Fore</span><span class="o">.</span><span class="n">LIGHTRED_EX</span><span class="si">}{</span><span class="n">val</span><span class="si">}{</span><span class="n">Fore</span><span class="o">.</span><span class="n">RESET</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="PdfHandler.encrypt">
+<a class="viewcode-back" href="../../pdf_handler.html#pdfhandler.pdf_handler.PdfHandler.encrypt">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">encrypt</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">output</span><span class="p">:</span> <span class="n">PathNoneType</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">in_place</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">password</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">owner_password</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Encrypt the PDF if it is not already encrypted.</span>
+
+<span class="sd">        This creates an encrypted version of the PDF using restrictive</span>
+<span class="sd">        permissions by default. If ``in_place`` is ``False``, the encrypted</span>
+<span class="sd">        file is saved to a new path; otherwise, the original file is</span>
+<span class="sd">        overwritten.</span>
+
+<span class="sd">        For fine-grained control over permissions, use :meth:`save_pike_pdf`</span>
+<span class="sd">        directly.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        output : str | Path | None, default None</span>
+<span class="sd">            Destination path for the encrypted PDF. Ignored if</span>
+<span class="sd">            ``in_place=True``. If ``None``, a new file is created with</span>
+<span class="sd">            ``&quot;-Encrypted&quot;`` appended to the original name.</span>
+<span class="sd">        in_place : bool, default False</span>
+<span class="sd">            Whether to overwrite the original file in place.</span>
+<span class="sd">        password : str | None, default None</span>
+<span class="sd">            The user password required to open the PDF. If ``None`` or empty,</span>
+<span class="sd">            no password is required to view.</span>
+<span class="sd">        owner_password : str | None, default None</span>
+<span class="sd">            The owner password used to set encryption and permissions.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">pdf_is_encrypted</span><span class="p">():</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Encrypting PDF: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pdf_path</span><span class="p">)</span>
+
+            <span class="n">output_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_output_path</span><span class="p">(</span><span class="n">in_place</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="s2">&quot;-Encrypted&quot;</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">save_pike_pdf</span><span class="p">(</span>
+                <span class="n">output_path</span><span class="p">,</span>
+                <span class="n">crypt_type</span><span class="o">=</span><span class="s2">&quot;encrypt&quot;</span><span class="p">,</span>
+                <span class="n">password</span><span class="o">=</span><span class="n">password</span><span class="p">,</span>
+                <span class="n">owner_password</span><span class="o">=</span><span class="n">owner_password</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;PDF already encrypted: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pdf_path</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="PdfHandler.decrypt">
+<a class="viewcode-back" href="../../pdf_handler.html#pdfhandler.pdf_handler.PdfHandler.decrypt">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">decrypt</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">output</span><span class="p">:</span> <span class="n">PathNoneType</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">in_place</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">owner_password</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Decrypt the PDF if it is currently encrypted.</span>
+
+<span class="sd">        If ``in_place`` is ``False`` (recommended), a decrypted copy is saved</span>
+<span class="sd">        to a new file; otherwise, the original file is overwritten. If the PDF</span>
+<span class="sd">        is not encrypted, no changes are made.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        output : str | Path | None, default None</span>
+<span class="sd">            Destination path for the decrypted PDF. Ignored if</span>
+<span class="sd">            ``in_place=True``. If ``None``, a new file is created with</span>
+<span class="sd">            ``&quot;-Decrypted&quot;`` appended to the original name.</span>
+<span class="sd">        in_place : bool, default False</span>
+<span class="sd">            Whether to overwrite the original file in place.</span>
+<span class="sd">        owner_password : str | None, default None</span>
+<span class="sd">            The owner password used to unlock and decrypt the PDF.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">owner_password</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">owner_password</span> <span class="o">=</span> <span class="s2">&quot;1234abcd&quot;</span>  <span class="c1"># nosec B105</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pdf_is_encrypted</span><span class="p">():</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Decrypting PDF: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pdf_path</span><span class="p">)</span>
+
+            <span class="n">output_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_output_path</span><span class="p">(</span><span class="n">in_place</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="s2">&quot;-Decrypted&quot;</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">save_pike_pdf</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span> <span class="n">crypt_type</span><span class="o">=</span><span class="s2">&quot;decrypt&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;PDF not encrypted, no changes made: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pdf_path</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="PdfHandler.rm">
+<a class="viewcode-back" href="../../pdf_handler.html#pdfhandler.pdf_handler.PdfHandler.rm">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">rm</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Delete the PDF file from disk.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pdf_path</span><span class="o">.</span><span class="n">unlink</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="PdfHandler.mv">
+<a class="viewcode-back" href="../../pdf_handler.html#pdfhandler.pdf_handler.PdfHandler.mv">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">mv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dst</span><span class="p">:</span> <span class="n">PathType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Move the PDF to a new location and update the internal path.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        dst : str | Path</span>
+<span class="sd">            Destination path, including the filename and ``.pdf`` extension.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">dst_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">dst</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pdf_path</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">dst_path</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pdf_path</span> <span class="o">=</span> <span class="n">dst_path</span></div>
+
+
+<div class="viewcode-block" id="PdfHandler.cp">
+<a class="viewcode-back" href="../../pdf_handler.html#pdfhandler.pdf_handler.PdfHandler.cp">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">cp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_path</span><span class="p">:</span> <span class="n">PathNoneType</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Copy the PDF to a specified location and return its Path.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        new_path : str | Path | None, optional</span>
+<span class="sd">            Path to the new copy. If None it will be saved to the original PDF&#39;s</span>
+<span class="sd">            path with &#39;-copy&#39; embedded between the stem and suffix. (Default: None).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">new_path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">new_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pdf_path</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">pdf_path</span><span class="o">.</span><span class="n">stem</span><span class="si">}</span><span class="s2">-copy.pdf&quot;</span>
+        <span class="n">new_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">new_path</span><span class="p">))</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pdf_path</span><span class="p">,</span> <span class="n">new_path</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">new_path</span></div>
+
+
+<div class="viewcode-block" id="PdfHandler.merge_pdfs">
+<a class="viewcode-back" href="../../pdf_handler.html#pdfhandler.pdf_handler.PdfHandler.merge_pdfs">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">merge_pdfs</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span>
+        <span class="n">pdf0_path</span><span class="p">:</span> <span class="n">PathType</span><span class="p">,</span>
+        <span class="n">pdf1_path</span><span class="p">:</span> <span class="n">PathType</span><span class="p">,</span>
+        <span class="n">output_path</span><span class="p">:</span> <span class="n">PathType</span><span class="p">,</span>
+        <span class="n">add_separator</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">separator_type</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="s2">&quot;blank&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Merge two PDF files, placing the first file on top.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        pdf0_path : str | Path</span>
+<span class="sd">            Path to the first PDF, which will appear first in the output.</span>
+<span class="sd">        pdf1_path : str | Path</span>
+<span class="sd">            Path to the second PDF, which will appear after the first.</span>
+<span class="sd">        output_path : str | Path</span>
+<span class="sd">            Path to save the merged output PDF.</span>
+<span class="sd">        add_separator : bool, default False</span>
+<span class="sd">            If ``True``, insert a separator page between the PDFs.</span>
+<span class="sd">        separator_type : {&quot;black&quot;, &quot;blank&quot;}, default &quot;black&quot;</span>
+<span class="sd">            Type of separator page to insert:</span>
+
+<span class="sd">            * ``&quot;black&quot;`` : a black bar (~1 in height)</span>
+<span class="sd">            * ``&quot;blank&quot;`` : a full blank page</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If ``separator_type`` is not ``&quot;black&quot;`` or ``&quot;blank&quot;``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="n">pikepdf</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">pdf0_path</span><span class="p">,</span> <span class="n">allow_overwriting_input</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">as</span> <span class="n">pdf0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">add_separator</span><span class="p">:</span>
+                <span class="k">match</span> <span class="n">separator_type</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+                    <span class="k">case</span> <span class="s2">&quot;black&quot;</span><span class="p">:</span>
+                        <span class="n">resource_file</span> <span class="o">=</span> <span class="s2">&quot;black_separator-636x72.pdf&quot;</span>
+                    <span class="k">case</span> <span class="s2">&quot;blank&quot;</span><span class="p">:</span>
+                        <span class="n">resource_file</span> <span class="o">=</span> <span class="s2">&quot;blank_page.pdf&quot;</span>
+                    <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
+                        <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span>
+                            <span class="s2">&quot;separator_type must be either &#39;black&#39; or &#39;blank&#39;, &quot;</span>
+                            <span class="sa">f</span><span class="s2">&quot;not </span><span class="si">{</span><span class="n">separator_type</span><span class="si">!r}</span><span class="s2">&quot;</span>
+                        <span class="p">)</span>
+                        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+                <span class="n">resource_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="s2">&quot;resources&quot;</span> <span class="o">/</span> <span class="n">resource_file</span>
+                <span class="k">with</span> <span class="p">(</span>
+                    <span class="n">as_file</span><span class="p">(</span><span class="n">resource_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">sep_path</span><span class="p">,</span>
+                    <span class="n">pikepdf</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">sep_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">sep_pdf</span><span class="p">,</span>
+                <span class="p">):</span>
+                    <span class="n">pdf0</span><span class="o">.</span><span class="n">pages</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">sep_pdf</span><span class="o">.</span><span class="n">pages</span><span class="p">)</span>
+
+            <span class="k">with</span> <span class="n">pikepdf</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">pdf1_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">pdf1</span><span class="p">:</span>
+                <span class="n">pdf0</span><span class="o">.</span><span class="n">pages</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">pdf1</span><span class="o">.</span><span class="n">pages</span><span class="p">)</span>
+
+            <span class="n">pdf0</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">output_path</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="PdfHandler.resize">
+<a class="viewcode-back" href="../../pdf_handler.html#pdfhandler.pdf_handler.PdfHandler.resize">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">resize</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">width</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">height</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">output_path</span><span class="p">:</span> <span class="n">PathNoneType</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Resize all pages in the PDF to the specified dimensions.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        width : int</span>
+<span class="sd">            Desired page width in points (1 inch = 72 points).</span>
+<span class="sd">        height : int</span>
+<span class="sd">            Desired page height in points (1 inch = 72 points).</span>
+<span class="sd">        output_path : str | Path | None, default None</span>
+<span class="sd">            Path to save the resized PDF. If ``None``, a new file is created in</span>
+<span class="sd">            the same directory with the name pattern</span>
+<span class="sd">            ``{original_name}-{width}x{height}.pdf``.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If ``output_path`` is provided and does not end with ``.pdf``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">output_path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">output_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pdf_path</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">pdf_path</span><span class="o">.</span><span class="n">stem</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">width</span><span class="si">}</span><span class="s2">x</span><span class="si">{</span><span class="n">height</span><span class="si">}</span><span class="s2">.pdf&quot;</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="nb">str</span><span class="p">(</span><span class="n">output_path</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.pdf&quot;</span><span class="p">):</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;output_path should end in .pdf, not </span><span class="si">{</span><span class="n">output_path</span><span class="si">!r}</span><span class="s2">&quot;</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+        <span class="n">pdf_dims_array</span> <span class="o">=</span> <span class="n">pikepdf</span><span class="o">.</span><span class="n">Array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">])</span>
+        <span class="k">with</span> <span class="n">pikepdf</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pdf_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">pdf</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">page</span> <span class="ow">in</span> <span class="n">pdf</span><span class="o">.</span><span class="n">pages</span><span class="p">:</span>
+                <span class="n">page</span><span class="o">.</span><span class="n">mediabox</span> <span class="o">=</span> <span class="n">pdf_dims_array</span>
+                <span class="n">page</span><span class="o">.</span><span class="n">cropbox</span> <span class="o">=</span> <span class="n">pdf_dims_array</span>
+
+            <span class="n">pdf</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">output_path</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="PdfHandler.pdfs_are_duplicates">
+<a class="viewcode-back" href="../../pdf_handler.html#pdfhandler.pdf_handler.PdfHandler.pdfs_are_duplicates">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">pdfs_are_duplicates</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">pdf0_path</span><span class="p">:</span> <span class="n">PathType</span><span class="p">,</span> <span class="n">pdf1_path</span><span class="p">:</span> <span class="n">PathType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return whether two PDFs have identical extracted text content.</span>
+
+<span class="sd">        Text is extracted using :mod:`pdfminer`. Layout, formatting, and</span>
+<span class="sd">        metadata differences are ignored.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        pdf0_path : str | Path</span>
+<span class="sd">            Path to the first PDF file.</span>
+<span class="sd">        pdf1_path : str | Path</span>
+<span class="sd">            Path to the second PDF file.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            ``True`` if the extracted text from both PDFs is identical,</span>
+<span class="sd">            ``False`` otherwise.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">extract_text</span><span class="p">(</span><span class="n">pdf0_path</span><span class="p">)</span> <span class="o">==</span> <span class="n">extract_text</span><span class="p">(</span><span class="n">pdf1_path</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2025, E. Tyler Carr
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script src="../../_static/documentation_options.js?v=92734c54"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/furo.js?v=46bd48cc"></script>
+    </body>
+</html>

@@ -1,7 +1,7 @@
 PdfHandler
 ==========
 
-.. automodule:: pdf_handler.pdf_handler
+.. automodule:: pdfhandler.pdf_handler
    :members:
    :show-inheritance:
    :undoc-members:

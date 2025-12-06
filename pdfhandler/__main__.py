@@ -1,15 +1,15 @@
 import argparse
-from pathlib import Path
 import sys
+from pathlib import Path
 
 from .pdf_handler import PdfHandler
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="📄 PdfHandlerETC – Command-line PDF utility for encryption, extraction, and more."
+        description="PdfHandlerETC - Command-line PDF utility for encryption, extraction, and more."
     )
-    parser.add_argument("--version", action="version", version="PdfHandlerETC 0.1.0")
+    parser.add_argument("--version", action="version", version="PdfHandlerETC 0.1.2")
 
     subparsers = parser.add_subparsers(dest="command", required=True)
 
@@ -36,9 +36,7 @@ def main() -> None:
     decrypt.add_argument("--in-place", action="store_true")
 
     # Permissions
-    perms = subparsers.add_parser(
-        "permissions", help="Show PDF encryption and permission flags"
-    )
+    perms = subparsers.add_parser("permissions", help="Show PDF encryption and permission flags")
     perms.add_argument("pdf", type=Path)
 
     # Resize
@@ -49,9 +47,7 @@ def main() -> None:
     resize.add_argument("--output", type=Path, default=None)
 
     # Duplicate check
-    dupe = subparsers.add_parser(
-        "dupe-check", help="Check if two PDFs are textually identical"
-    )
+    dupe = subparsers.add_parser("dupe-check", help="Check if two PDFs are textually identical")
     dupe.add_argument("pdf0", type=Path)
     dupe.add_argument("pdf1", type=Path)
 
@@ -98,7 +94,7 @@ def main() -> None:
 
             case "dupe-check":
                 are_same = PdfHandler.pdfs_are_duplicates(args.pdf0, args.pdf1)
-                print("Duplicate: ✅" if are_same else "Duplicate: ❌")
+                print("Duplicate: YES" if are_same else "Duplicate: NO")
 
             case "merge":
                 PdfHandler.merge_pdfs(

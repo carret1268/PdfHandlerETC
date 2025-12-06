@@ -1,12 +1,12 @@
 [project]
 name = "pdfhandleretc"
-version = "0.1.1"
+version = "0.1.2"
 description = "Lightweight command-line and Python API toolkit for PDF text extraction, encryption, permissions, and more."
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "CC0-1.0" }
 authors = [
-  { name = "Erik Carr", email = "your.email@example.com" }
+  { name = "E. Tyler Carr", email = "carret1268@gmail.com" }
 ]
 keywords = ["pdf", "pdfminer", "pikepdf", "encryption", "text-extraction", "cli"]
 classifiers = [
@@ -20,6 +20,18 @@ dependencies = [
   "pdfminer.six>=20221105",
   "pikepdf>=7.0.0",
   "colorama>=0.4.6"
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff",
+    "mypy",
+    "sphinx",
+    "sphinx_autodoc_typehints",
+    "furo",
+    "myst_parser",
+    "build",
+    "coverage"
 ]
 
 [project.urls]
@@ -40,18 +52,56 @@ include-package-data = true
 [tool.setuptools.packages.find]
 where = ["."]
 
+# Ruff config
 [tool.ruff]
-lint.ignore = ["E501"]
+line-length = 100
+indent-width = 4
+target-version = "py312"
 
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "auto"
+skip-magic-trailing-comma = false
+
+[tool.ruff.lint]
+select = [
+    "E", "F",
+    "I",
+    "N",
+    "D",
+    "B",
+    "UP",
+    "C4",
+    "PLC", "PLE", "PLR", "PLW",
+    "SIM",
+    "PERF",
+    "TID",
+    "RUF",
+]
+ignore = [
+    "D203", # one-blank-line-before-class: conflicts with D211
+    "D213", # multi-line docstring summary on second line
+    "D401", # imperative mood sometimes too strict
+    "PLR0913", # too many function args
+    "PLR2004", # magic numbers
+    "PLR0915", # too many statements
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
+
+[tool.ruff.lint.per-file-ignores]
+"**/__init__.py" = ["ALL"]
+"**/__main__.py" = ["ALL"]
+"**/tests/*" = ["ALL"]
+
+# mypy config
 [tool.mypy]
-python_version = "3.10"  
+python_version = "3.12"  
 ignore_missing_imports = true
 strict_optional = true
 disallow_untyped_defs = true
 disallow_incomplete_defs = true
 warn_unused_ignores = true
 show_error_codes = true
-
-[tool.coverage.run]
-branch = true
-source = ["pdf_handler"]

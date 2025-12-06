@@ -3,3 +3,6 @@
 pdf_handler/__pycache__/
 *.egg-info
 dist/
+.venv/
+htmlcov/
+build/
